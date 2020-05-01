@@ -4,21 +4,21 @@
   name: Find Suspicious IPs
   description: Discover IPs that connected to the honeypot port
   tactic: detection
-    technique:
-      attack_id: x
-      name: x
-      platforms:
-        linux:
-          sh:
-            command: |
-              cat honeyport.txt | grep -i 'Connection from' | awk '{print $3}'
-            parsers:
-              plugins.response.app.parsers.basic_strip:
-                - source: remote.suspicious.ip
-        darwin:
-          sh:
-            command: |
-              cat honeyport.txt | grep -i 'Connection from' | awk '{print $3}'
-            parsers:
-              plugins.response.app.parsers.basic_strip:
-                - source: remote.suspicious.ip
+  technique:
+    attack_id: x
+    name: x
+  platforms:
+    linux:
+      sh:
+        command: |
+          cat honeyport.txt | grep -i 'Connection from' | awk '{print $3}'
+        parsers:
+          plugins.response.app.parsers.basic_strip:
+            - source: remote.suspicious.ip
+    darwin:
+      sh:
+        command: |
+          cat honeyport.txt | grep -i 'Connection from' | awk '{print $3}'
+        parsers:
+          plugins.response.app.parsers.basic_strip:
+            - source: remote.suspicious.ip
