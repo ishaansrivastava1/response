@@ -11,20 +11,20 @@
       sh:
         command: |
           if ! test -f hosts_backup; then cp /etc/hosts hosts_backup; fi;
-          /bin/bash -c 'echo -e "127.0.0.1\t#{remote.suspicious.ip}" >> /etc/hosts'
+          /bin/bash -c 'echo -e "127.0.0.1\t#{remote.suspicious.url}" >> /etc/hosts'
         cleanup: |
           mv -f hosts_backup /etc/hosts
     darwin:
       sh:
         command: |
           if ! test -f hosts_backup; then cp /etc/hosts hosts_backup; fi;
-          /bin/bash -c 'echo -e "127.0.0.1\t#{remote.suspicious.ip}" >> /etc/hosts'
+          /bin/bash -c 'echo -e "127.0.0.1\t#{remote.suspicious.url}" >> /etc/hosts'
         cleanup: |
           mv -f hosts_backup /etc/hosts
     windows:
       psh:
         command: |
           if -not (Test-Path -Path .\hosts_backup) { Copy-Item -Path c:\windows\system32\drivers\etc\hosts -Destination .\hosts_backup; }
-          Add-Content c:\windows\system32\drivers\etc\hosts "#{remote.suspicious.ip}`tlocalhost"
+          Add-Content c:\windows\system32\drivers\etc\hosts "localhost`t#{remote.suspicious.url}"
         cleanup: |
           Move-Item -Path .\hosts_backup -Destination c:\windows\system32\drivers\etc\hosts -Force
